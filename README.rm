@@ -1,0 +1,8 @@
+
+python -m venv env
+
+. env/Scripts/activate
+
+cd app
+
+uvicorn main:app --reload
