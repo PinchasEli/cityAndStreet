@@ -16,14 +16,14 @@ async def create_city(request: Request, city_data: City):
 @router.get("/")
 async def get_all_cities():
     cities = await CityService().get_all_cities()
-    return {"cities": cities}
+    return cities
 
 
 @router.get("/{city_id}")
 async def get_city(city_id: str):
     city = await CityService().get_city(city_id)
     if city:
-        return {"city": city}
+        return city
 
     raise HTTPException(status_code=404, detail="City not found")
 
@@ -39,10 +39,8 @@ async def update_city(city_id: str, city_data: City):
 
 @router.delete("/{city_id}")
 async def delete_city(city_id: str):
-    try:
-        deleted_count = await CityService().delete_city(city_id)
-        if deleted_count == 1:
-            return {"message": "City deleted successfully"}
-        raise HTTPException(status_code=404, detail="City not found")
-    except:
-        raise HTTPException(status_code=404, detail="City not found")
+    deleted_count = await CityService().delete_city(city_id)
+    if deleted_count == 1:
+        return {"message": "City deleted successfully"}
+
+    raise HTTPException(status_code=404, detail="City not found")

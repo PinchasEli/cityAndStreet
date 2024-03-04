@@ -20,7 +20,7 @@ async def get_all_streets():
 async def get_street(street_name: str): 
     street = await StreetService().get_street(street_name)
     if street:
-        return {"street": street}
+        return street
 
     raise HTTPException(status_code=404, detail="Street not found")
 

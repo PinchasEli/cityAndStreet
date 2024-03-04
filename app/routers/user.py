@@ -25,7 +25,7 @@ async def get_user(value: str, by: SearchUserBy):
 
     user = await UserService().get_user(value, by)
     if user:
-        return {"user": user}
+        return user
 
     raise HTTPException(status_code=404, detail="User not found")
 
